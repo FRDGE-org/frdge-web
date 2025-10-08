@@ -1,0 +1,19 @@
+<svg width="175" height="175" viewBox="0 0 175 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="175" height="175" fill="white"/>
+<rect x="45" y="15" width="85" height="146" rx="2" stroke="black" stroke-width="4"/>
+<path d="M45.5 69H129.5" stroke="black" stroke-width="4"/>
+<line x1="56" y1="55" x2="56" y2="27" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<line x1="56" y1="114" x2="56" y2="86" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<rect x="100" y="13" width="25" height="4" fill="white"/>
+<rect x="128" y="41" width="22" height="4" transform="rotate(-90 128 41)" fill="white"/>
+<rect x="128" y="64" width="15" height="4" transform="rotate(-90 128 64)" fill="white"/>
+<path d="M140.482 52.5361C140.724 53.1236 141.203 53.5816 141.801 53.7969L149.309 56.5L141.801 59.2031C141.203 59.4184 140.724 59.8764 140.482 60.4639L137.5 67.7129L134.518 60.4639L134.416 60.25C134.154 59.7658 133.722 59.3915 133.199 59.2031L125.69 56.5L133.199 53.7969C133.797 53.5816 134.276 53.1236 134.518 52.5361L137.5 45.2861L140.482 52.5361Z" fill="black" stroke="black" stroke-width="2.5"/>
+<path d="M148.621 32.7627C148.864 33.3495 149.344 33.8058 149.942 34.0195L151.285 34.5L149.942 34.9805C149.419 35.1675 148.986 35.54 148.723 36.0234L148.621 36.2373L148 37.7354L147.379 36.2373C147.136 35.6505 146.656 35.1942 146.058 34.9805L144.714 34.5L146.058 34.0195C146.656 33.8058 147.136 33.3495 147.379 32.7627L148 31.2637L148.621 32.7627Z" fill="black" stroke="black" stroke-width="2.5"/>
+<path d="M119.096 23.2041C119.339 23.791 119.818 24.2478 120.416 24.4619L137.289 30.5L120.416 36.5381C119.893 36.7254 119.46 37.0985 119.197 37.582L119.096 37.7959L112.5 53.7295L105.904 37.7959L105.803 37.582C105.54 37.0985 105.107 36.7254 104.584 36.5381L87.71 30.5L104.584 24.4619C105.182 24.2478 105.661 23.791 105.904 23.2041L112.5 7.26953L119.096 23.2041Z" fill="black" stroke="black" stroke-width="2.5"/>
+<line x1="123" y1="15" x2="127" y2="15" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<line x1="130" y1="22" x2="130" y2="17" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<line x1="99" y1="15" x2="101" y2="15" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<line x1="130" y1="41" x2="130" y2="39" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<line x1="130" y1="49" x2="130" y2="47" stroke="black" stroke-width="4" stroke-linecap="round"/>
+<line x1="130" y1="66" x2="130" y2="64" stroke="black" stroke-width="4" stroke-linecap="round"/>
+</svg>
