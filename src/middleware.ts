@@ -53,7 +53,7 @@ export async function updateSession(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
       console.log('Trying to hit login or signup after having logged in; redirecting to home')
-      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_SUPABASE_URL))
+      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_BASE_URL))
     }
   }
 
@@ -66,7 +66,7 @@ export async function updateSession(request: NextRequest) {
     if (user) {
       // You can't use prisma in middleware bc Next operates in an Edge
       // environment which is different than a typical NodeJS environment.
-      const { newestNoteId } = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/api/fetch-newest-note?userId=${user.id}`)
+      const { newestNoteId } = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fetch-newest-note?userId=${user.id}`)
         .then(res => res.json())
 
       if (newestNoteId) {
@@ -75,7 +75,7 @@ export async function updateSession(request: NextRequest) {
         return NextResponse.redirect(url)
       } else {
         const { noteId } = await fetch(
-          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/api/create-new-note?userId=${user.id}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/create-new-note?userId=${user.id}`,
           {
             method: 'POST',
             headers: {

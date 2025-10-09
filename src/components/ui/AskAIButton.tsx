@@ -22,7 +22,7 @@ type Props = {
 }
 
 function AskAIButton({ user }: Props) {
-    const router = useRouter()
+    // const router = useRouter()
 
     const [isPending, startTransition] = useTransition()
 
