@@ -4,7 +4,6 @@ import { getUser } from "@/auth/server"
 import { prisma } from "@/db/prisma"
 import { handleError } from "@/lib/utils"
 import openai from "@/openai.index"
-import { notStrictEqual } from "assert"
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs'
 
 export const createNoteAction = async (noteId: string) => {

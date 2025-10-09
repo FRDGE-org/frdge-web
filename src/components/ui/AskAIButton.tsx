@@ -11,7 +11,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Fragment, useRef, useState, useTransition } from "react"
-import router from "next/router"
 import { useRouter } from "next/navigation"
 import { Textarea } from "./textarea"
 import { ArrowUpIcon } from "lucide-react"
@@ -32,18 +31,18 @@ function AskAIButton({ user }: Props) {
     const [questions, setQuestions] = useState<string[]>([])
     const [responses, setResponses] = useState<string[]>([])
 
-    const handleOnOpenChange = (isOpen: boolean) => {
-        if (!user) {
-            router.push('/login')
-        } else {
-            if (isOpen) {
-                setQuestionText('')
-                setQuestions([])
-                setResponses([])
-            }
-            setOpen(isOpen)
-        }
-    }
+    // const handleOnOpenChange = (isOpen: boolean) => {
+    //     if (!user) {
+    //         router.push('/login')
+    //     } else {
+    //         if (isOpen) {
+    //             setQuestionText('')
+    //             setQuestions([])
+    //             setResponses([])
+    //         }
+    //         setOpen(isOpen)
+    //     }
+    // }
 
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
