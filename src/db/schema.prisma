@@ -1,26 +1,57 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
+enum Storage {
+  PANTRY
+  FREEZER
+  FRIDGE
+}
+
+enum TimeToExpire {
+  VERYSHORT
+  SHORT
+  MEDIUM
+  LONG
+  VERYLONG
+}
+
 model Note {
-  id            String      @id @default(uuid())
-  text          String
-  author        User        @relation(fields: [authorId], references: [id])
-  authorId      String
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt @default(now())
+  id        String   @id @default(uuid()) @db.Uuid
+  text      String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Ingredient {
+  id           String       @id @default(uuid()) @db.Uuid
+  author       User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId     String       @db.Uuid
+  name         String
+  storage      Storage      @default(FRIDGE)
+  dateBought   DateTime     @default(now())
+  isPackaged   Boolean      @default(false)
+  timeToExpire TimeToExpire @default(VERYSHORT)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([authorId])
 }
 
 model User {
-  id            String      @id @default(uuid())
-  email         String      @unique
-  name          String?
-  notes         Note[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt @default(now())
+  id          String       @id @default(uuid()) @db.Uuid
+  email       String       @unique
+  name        String?
+  notes       Note[]
+  ingredients Ingredient[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now()) @updatedAt
 }
