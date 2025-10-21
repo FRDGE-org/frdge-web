@@ -17,10 +17,10 @@ async function HomePage({searchParams}: Props) {
                   ? noteIdParam![0]
                   : noteIdParam || ''
   
-  const note = null
-  
+  let note = null
+
   if (noteId != '') {
-    const note = await prisma.note.findUnique({
+    note = await prisma.note.findUnique({
       where: {id: noteId, authorId: user?.id}
     })
   }
