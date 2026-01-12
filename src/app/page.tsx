@@ -1,39 +1,48 @@
 import { getUser } from '@/auth/server'
-import AskAIButton from '@/components/ui/AskAIButton'
-import NewNoteButton from '@/components/ui/NewNoteButton'
-import NoteTextInput from '@/components/ui/NoteTextInput'
+import AddIngredientForm from '@/components/ui/AddIngredientForm'
+import DeleteIngredientButton from '@/components/ui/DeleteIngredientButton'
 import { prisma } from '@/db/prisma'
-import React from 'react'
 
-type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
-async function HomePage({searchParams}: Props) {
-  const noteIdParam = (await searchParams).noteId
+async function HomePage() {
   const user = await getUser()
 
-  const noteId = Array.isArray(noteIdParam)
-                  ? noteIdParam![0]
-                  : noteIdParam || ''
-  
-  let note = null
-
-  if (noteId != '') {
-    note = await prisma.note.findUnique({
-      where: {id: noteId, authorId: user?.id}
-    })
+  if (!user) {
+    return (
+      <div className="flex h-full flex-col items-center p-4">
+        <p>Please log in to see your ingredients.</p>
+      </div>
+    )
   }
 
-  // h-20 bg-red-400 text-blue-300
-  return (<div className="flex h-full flex-col items-center g-4">
-    <div className='flex w-full max-w-4xl justify-end gap-2'>
-      <AskAIButton user={user}/>
-      <NewNoteButton user={user}/>
+  const ingredients = await prisma.ingredient.findMany({
+    where: { authorId: user.id },
+    orderBy: { createdAt: 'desc' }
+  })
 
-      <NoteTextInput noteId={noteId} startingNoteText={note?.text || ''}/>
+  return (
+    <div className="flex h-full flex-col items-center p-4 gap-4">
+      <h1 className="text-2xl font-bold">My Ingredients</h1>
+
+      <AddIngredientForm />
+
+      <div className="w-full max-w-2xl space-y-2">
+        {ingredients.length === 0 ? (
+          <p className="text-gray-500">No ingredients yet. Add one above!</p>
+        ) : (
+          ingredients.map((ingredient) => (
+            <p key={ingredient.id} className="p-2 border rounded">
+              <strong>{ingredient.name}</strong> |
+              Storage: {ingredient.storage} |
+              Bought: {ingredient.dateBought.toLocaleDateString()} |
+              Packaged: {ingredient.isPackaged ? 'Yes' : 'No'} |
+              Expires: {ingredient.timeToExpire}
+              <DeleteIngredientButton ingredientId={ingredient.id} />
+            </p>
+          ))
+        )}
+      </div>
     </div>
-  </div>)
+  )
 }
 
 export default HomePage
