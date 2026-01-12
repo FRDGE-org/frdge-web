@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "pnpm dlx prisma generate --schema=src/db/schema.prisma && next build",
+    "build": "pnpm dlx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "migrate": "pnpm dlx prisma generate && dotenv pnpm dlx prisma migrate dev"
