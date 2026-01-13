@@ -9,6 +9,7 @@ import AddIngredientButton from './AddIngredientButton'
 import { addDays, differenceInDays } from 'date-fns'
 import { ChefHat, Trash2 } from 'lucide-react'
 
+// Useless comment
 type Props = {
   ingredients: Ingredient[]
 }
