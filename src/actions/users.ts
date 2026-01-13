@@ -38,7 +38,10 @@ export const signUpAction = async (email: string, password: string) => {
         const { auth } = await createClient()
         const { data, error } = await auth.signUp({
             email,
-            password
+            password,
+            options: {
+                emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`
+            }
         })
         if (error) {
             // console.log('[signUpAction] error right after auth.signup. The error isnt null: ', error)
