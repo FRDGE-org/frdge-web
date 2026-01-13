@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 import type { Ingredient, TimeToExpire } from '@prisma/client'
 import AddIngredientButton from './AddIngredientButton'
 import { addDays, differenceInDays } from 'date-fns'
-import { ChefHat, Trash2 } from 'lucide-react'
+import { ChefHat, Edit, Trash2 } from 'lucide-react'
 
 type Props = {
   ingredients: Ingredient[]
@@ -119,12 +119,15 @@ export default function IngredientList({ ingredients }: Props) {
         </div>
       </div>
       <div className='flex flex-end flex-row w-full justify-end'>
-        <div className='flex flex-col gap-2'>
-          <AddIngredientButton />
-          <Button disabled={selectedCount === 0}><ChefHat/></Button>
+        <div className='grid grid-cols-2 gap-2'>
+          <div/>
           <Button disabled={selectedCount === 0 || isDeleting} onClick={handleDeleteSelected}>
             {isDeleting ? '...' : <Trash2/>}
           </Button>
+          <Button disabled={selectedCount === 0}><ChefHat/></Button>
+          <AddIngredientButton />
+          <div/>
+          <Button disabled={selectedCount !== 1} onClick={()=>{/*@TODO*/}}><Edit/></Button>
         </div>
       </div>
     </>
