@@ -55,3 +55,22 @@ export const deleteIngredientAction = async (ingredientId: string) => {
         return handleError(error)
     }
 }
+
+export const deleteIngredientsAction = async (ingredientIds: string[]) => {
+    try {
+        const user = await getUser()
+        if (!user) throw new Error('You must be logged in to delete ingredients')
+
+        await prisma.ingredient.deleteMany({
+            where: {
+                id: { in: ingredientIds },
+                authorId: user.id
+            }
+        })
+
+        revalidatePath('/')
+        return { errorMessage: null }
+    } catch (error) {
+        return handleError(error)
+    }
+}

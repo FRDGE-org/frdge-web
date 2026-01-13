@@ -3,6 +3,7 @@
 import { deleteIngredientAction } from "@/actions/ingredients"
 import { useState } from "react"
 import { toast } from "sonner"
+import { Button } from "./button"
 
 type Props = {
     ingredientId: string
@@ -24,12 +25,12 @@ export default function DeleteIngredientButton({ ingredientId }: Props) {
     }
 
     return (
-        <button
+        <Button
             onClick={handleDelete}
             disabled={isLoading}
-            className="ml-2 px-2 py-1 bg-red-500 text-white text-sm rounded disabled:opacity-50"
+            // className="ml-2 px-2 py-1 bg-red-500 text-white text-sm rounded disabled:opacity-50"
         >
-            {isLoading ? '...' : 'Delete'}
-        </button>
+            {isLoading ? '...' : '✕'}
+        </Button>
     )
 }

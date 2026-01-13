@@ -32,7 +32,7 @@ async function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel className="mb-2 mt-2 text-lg">
             {user
-                ? 'Your notes'
+                ? 'Sidebar menu'
                 : (<p>
                     <Link className='underline' href='/login'>Login</Link>{" "}to see your notes.
                   </p>)
