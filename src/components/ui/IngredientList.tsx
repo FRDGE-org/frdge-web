@@ -7,16 +7,16 @@ import { toast } from 'sonner'
 import type { Ingredient, TimeToExpire } from '@prisma/client'
 import AddIngredientButton from './AddIngredientButton'
 import { addDays, differenceInDays } from 'date-fns'
-import { ChefHat, Edit, Trash2 } from 'lucide-react'
+import { ChefHat, Edit, Refrigerator, Snowflake, Trash2, Wheat } from 'lucide-react'
 
 type Props = {
   ingredients: Ingredient[]
 }
 
-const storageEmoji = {
-  PANTRY: '🥫',
-  FRIDGE: '🌀',
-  FREEZER: '❄️',
+const storageIcon = {
+  PANTRY: <Wheat        color='#ca8a04' className='size-5 mr-2'/>,
+  FRIDGE: <Refrigerator color='#84cc16' className='size-5 mr-2'/>,
+  FREEZER: <Snowflake   color='#bae6fd' className='size-5 mr-2'/>,
 }
 
 // Duration in days for each TimeToExpire category
@@ -100,8 +100,8 @@ export default function IngredientList({ ingredients }: Props) {
                     : 'hover:bg-muted/50'
                   }`}
               >
-                <div>
-                  {storageEmoji[ingredient.storage]}
+                <div className='flex flex-row'>
+                  {storageIcon[ingredient.storage]}
                   {ingredient.name}
                 </div>
                 {/* <div className="flex justify-between w-full"> */}
