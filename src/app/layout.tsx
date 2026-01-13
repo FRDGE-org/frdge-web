@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/ui/AppSidebar";
 import NoteProvider from "@/providers/NoteProvider";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "FRDGE",
@@ -35,6 +36,7 @@ export default function RootLayout({
                 <main className="flex flex-1 flex-col px-4 pt-10 xl:px-8">
                   {children}
                 </main>
+                <Footer/>
               </div>
               <Toaster/>
             </SidebarProvider>
