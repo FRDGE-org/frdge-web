@@ -48,6 +48,7 @@ export const signUpAction = async (email: string, password: string) => {
             throw error
         } else {
             // console.log('[signUpAction] auth.signup worked. Theres no error.')
+            console.log('Redirect URL:', `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`)
         }
 
         const userId = data.user?.id
