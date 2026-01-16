@@ -1,5 +1,6 @@
 import { getUser } from '@/auth/server'
 import IngredientList from '@/components/ui/IngredientList'
+import PushNotificationManager from '@/components/PushNotificationManager'
 import { prisma } from '@/db/prisma'
 
 async function HomePage() {
@@ -21,6 +22,9 @@ async function HomePage() {
   return (
     <div className="flex h-full flex-col items-center p-4 gap-4">
       <h1 className="text-xl font-semibold">Ingredients</h1>
+
+      {/* Push Notification Setup */}
+      <PushNotificationManager userId={user.id} />
 
       <IngredientList ingredients={ingredients} />
     </div>
