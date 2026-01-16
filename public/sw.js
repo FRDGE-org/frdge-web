@@ -19,9 +19,27 @@ self.addEventListener('push', function(event) {
 })
 
 // Handle when user clicks notification
+// Handle when user clicks notification
 self.addEventListener('notificationclick', function(event) {
-    event.notification.close()
-    event.waitUntil(
-        clients.openWindow(event.notification.data.url || '/')
-    )
+  event.notification.close()
+  
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then(function(clientList) {
+        const url = event.notification.data.url || '/'
+        
+        // Check if app is already open
+        for (let i = 0; i < clientList.length; i++) {
+          const client = clientList[i]
+          if (client.url === url && 'focus' in client) {
+            return client.focus()  // Focus existing tab
+          }
+        }
+        
+        // If not open, open new window
+        if (clients.openWindow) {
+          return clients.openWindow(url)
+        }
+      })
+  )
 })
