@@ -56,7 +56,7 @@ export async function unsubscribeFromPushNotifications(userId: string) {
 
 export async function sendPushNotification(
   userId: string,
-  notification: { title: string; body: string; url?: string }
+  notification: { title: string; body: string; url?: string; icon?: string }
 ) {
   try {
     const subscriptions = await prisma.pushSubscription.findMany({
