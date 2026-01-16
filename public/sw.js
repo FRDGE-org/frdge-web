@@ -1,5 +1,5 @@
 // Service worker version - increment this to force update
-const CACHE_VERSION = 'v3'
+const CACHE_VERSION = 'v4'
 
 // Force immediate activation of new service worker
 self.addEventListener('install', function(event) {
@@ -38,18 +38,23 @@ self.addEventListener('notificationclick', function(event) {
     clients.matchAll({ type: 'window', includeUncontrolled: true })
       .then(function(clientList) {
         const urlToOpen = event.notification.data.url || '/'
+        const appOrigin = self.location.origin  // e.g. https://frdge.app
 
-        // If any tab is open, focus it and navigate if needed
-        if (clientList.length > 0) {
-          const client = clientList[0]
-          return client.focus().then(function() {
-            if ('navigate' in client) {
-              return client.navigate(urlToOpen)
+        // Find a tab that's on our app (same origin)
+        const appTab = clientList.find(function(client) {
+          return client.url.startsWith(appOrigin)
+        })
+
+        if (appTab) {
+          // Focus the existing app tab and navigate to notification URL
+          return appTab.focus().then(function() {
+            if ('navigate' in appTab) {
+              return appTab.navigate(urlToOpen)
             }
           })
         }
 
-        // If no tabs open, open new window
+        // No app tab open, open a new one
         if (clients.openWindow) {
           return clients.openWindow(urlToOpen)
         }
