@@ -1,3 +1,15 @@
+// Service worker version - increment this to force update
+const CACHE_VERSION = 'v2'
+
+// Force immediate activation of new service worker
+self.addEventListener('install', function(event) {
+  self.skipWaiting()
+})
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(clients.claim())
+})
+
 // This runs in the background, separate from the React app
 self.addEventListener('push', function(event) {
     if (event.data) {
