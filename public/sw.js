@@ -1,5 +1,5 @@
 // Service worker version - increment this to force update
-const CACHE_VERSION = 'v2'
+const CACHE_VERSION = 'v3'
 
 // Force immediate activation of new service worker
 self.addEventListener('install', function(event) {
@@ -31,26 +31,27 @@ self.addEventListener('push', function(event) {
 })
 
 // Handle when user clicks notification
-// Handle when user clicks notification
 self.addEventListener('notificationclick', function(event) {
   event.notification.close()
-  
+
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true })
       .then(function(clientList) {
-        const url = event.notification.data.url || '/'
-        
-        // Check if app is already open
-        for (let i = 0; i < clientList.length; i++) {
-          const client = clientList[i]
-          if (client.url === url && 'focus' in client) {
-            return client.focus()  // Focus existing tab
-          }
+        const urlToOpen = event.notification.data.url || '/'
+
+        // If any tab is open, focus it and navigate if needed
+        if (clientList.length > 0) {
+          const client = clientList[0]
+          return client.focus().then(function() {
+            if ('navigate' in client) {
+              return client.navigate(urlToOpen)
+            }
+          })
         }
-        
-        // If not open, open new window
+
+        // If no tabs open, open new window
         if (clients.openWindow) {
-          return clients.openWindow(url)
+          return clients.openWindow(urlToOpen)
         }
       })
   )
