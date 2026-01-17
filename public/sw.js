@@ -1,5 +1,5 @@
 // Service worker version - increment this to force update
-const CACHE_VERSION = 'v4'
+const CACHE_VERSION = 'v5'
 
 // Force immediate activation of new service worker
 self.addEventListener('install', function(event) {
@@ -42,7 +42,7 @@ self.addEventListener('notificationclick', function(event) {
 
         // Find a tab that's on our app (same origin)
         const appTab = clientList.find(function(client) {
-          return client.url.startsWith(appOrigin)
+          return !client.url.endsWith('test-notification') && client.url.startsWith(appOrigin)
         })
 
         if (appTab) {
