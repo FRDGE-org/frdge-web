@@ -89,8 +89,10 @@ export default function PushNotificationManager({ userId }: { userId: string }) 
   async function unsubscribe() {
     setIsLoading(true)
     try {
-      await subscription?.unsubscribe()
-      await unsubscribeFromPushNotifications(userId)
+      if (subscription) { 
+        await unsubscribeFromPushNotifications(userId, subscription.endpoint)
+        await subscription.unsubscribe()
+      }
     } catch (error) {
       console.error('Failed to unsubscribe:', error)
     } finally {

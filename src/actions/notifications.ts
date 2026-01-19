@@ -43,10 +43,10 @@ export async function subscribeToPushNotifications(
   }
 }
 
-export async function unsubscribeFromPushNotifications(userId: string) {
+export async function unsubscribeFromPushNotifications(userId: string, endpoint: string) {
   try {
     await prisma.pushSubscription.deleteMany({
-      where: { userId }
+      where: { userId, endpoint }
     })
     return { success: true }
   } catch (error) {
