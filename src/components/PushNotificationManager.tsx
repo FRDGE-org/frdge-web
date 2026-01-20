@@ -92,6 +92,7 @@ export default function PushNotificationManager({ userId }: { userId: string }) 
       if (subscription) { 
         await unsubscribeFromPushNotifications(userId, subscription.endpoint)
         await subscription.unsubscribe()
+        setSubscription(null)
       }
     } catch (error) {
       console.error('Failed to unsubscribe:', error)
