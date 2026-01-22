@@ -20,15 +20,6 @@ enum TimeToExpire {
   VERYLONG
 }
 
-model Note {
-  id        String   @id @default(uuid()) @db.Uuid
-  text      String
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String   @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-}
-
 model Ingredient {
   id           String       @id @default(uuid()) @db.Uuid
   author       User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
@@ -48,7 +39,6 @@ model User {
   id          String       @id @default(uuid()) @db.Uuid
   email       String       @unique
   name        String?
-  notes       Note[]
   ingredients Ingredient[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @default(now()) @updatedAt
