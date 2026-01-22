@@ -8,6 +8,7 @@ import type { Ingredient, TimeToExpire } from '@prisma/client'
 import AddIngredientButton from './AddIngredientButton'
 import { addDays, differenceInDays } from 'date-fns'
 import { ChefHat, Edit, Refrigerator, Snowflake, Trash2, Wheat } from 'lucide-react'
+import EditIngredientButton from './EditIngredientButton'
 
 type Props = {
   ingredients: Ingredient[]
@@ -81,6 +82,8 @@ export default function IngredientList({ ingredients }: Props) {
 
   const selectedCount = selectedIds.size
 
+  const selectedIngredient = ingredients.find(i => selectedIds.has(i.id))
+
   return (
     <>
       <div className="w-full max-w-md space-y-2 h-full">
@@ -127,7 +130,7 @@ export default function IngredientList({ ingredients }: Props) {
           <Button disabled={selectedCount === 0}><ChefHat/></Button>
           <AddIngredientButton />
           <div/>
-          <Button disabled={selectedCount !== 1} onClick={()=>{/*@TODO*/}}><Edit/></Button>
+          <EditIngredientButton ingredient={selectedIngredient} disabled={selectedCount !== 1}/>
         </div>
       </div>
     </>

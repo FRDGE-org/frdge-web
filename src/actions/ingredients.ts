@@ -37,6 +37,32 @@ export const createIngredientAction = async (data: CreateIngredientData) => {
     }
 }
 
+export const updateIngredientAction = async (ingredientId: string, data: CreateIngredientData) => {
+    try {
+        const user = await getUser()
+        if (!user) throw new Error('You must be logged in to update an ingredient')
+
+        await prisma.ingredient.update({
+            where: {
+                id: ingredientId,
+                authorId: user.id,
+            },
+            data: {
+                name: data.name,
+                storage: data.storage,
+                dateBought: data.dateBought,
+                isPackaged: data.isPackaged,
+                timeToExpire: data.timeToExpire
+            }
+        })
+
+        revalidatePath('/')
+        return { errorMessage: null }
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
 export const deleteIngredientAction = async (ingredientId: string) => {
     try {
         const user = await getUser()
