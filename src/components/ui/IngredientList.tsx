@@ -9,6 +9,7 @@ import AddIngredientButton from './AddIngredientButton'
 import { addDays, differenceInDays } from 'date-fns'
 import { ChefHat, Edit, Refrigerator, Snowflake, Trash2, Wheat } from 'lucide-react'
 import EditIngredientButton from './EditIngredientButton'
+import RecipeModal from './RecipeModal'
 
 type Props = {
   ingredients: Ingredient[]
@@ -55,6 +56,9 @@ function getExpirationColor(expirationDate: Date): string {
 export default function IngredientList({ ingredients }: Props) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [isDeleting, setIsDeleting] = useState(false)
+  const selectedCount = selectedIds.size
+  const selectedIngredient = ingredients.find(i => selectedIds.has(i.id))
+  const selectedIngredients = ingredients.filter(i => selectedIds.has(i.id))
 
   const toggleSelect = (id: string) => {
     setSelectedIds((prev) => {
@@ -79,10 +83,6 @@ export default function IngredientList({ ingredients }: Props) {
     }
     setIsDeleting(false)
   }
-
-  const selectedCount = selectedIds.size
-
-  const selectedIngredient = ingredients.find(i => selectedIds.has(i.id))
 
   return (
     <>
@@ -127,7 +127,7 @@ export default function IngredientList({ ingredients }: Props) {
           <Button disabled={selectedCount === 0 || isDeleting} onClick={handleDeleteSelected}>
             {isDeleting ? '...' : <Trash2/>}
           </Button>
-          <Button disabled={selectedCount === 0}><ChefHat/></Button>
+          <RecipeModal ingredients={selectedIngredients} disabled={selectedCount === 0}/>
           <AddIngredientButton />
           <div/>
           <EditIngredientButton ingredient={selectedIngredient} disabled={selectedCount !== 1}/>
