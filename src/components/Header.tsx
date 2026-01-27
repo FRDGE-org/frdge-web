@@ -16,7 +16,7 @@ async function Header() {
         //     boxShadow: shadow
         // }}
         >
-            <SidebarTrigger className='absolute left-1 top-1'/>
+            {/* <SidebarTrigger className='absolute left-1 top-1'/> */}
             <Link className='flex items-center gap-2' href='/'>
                 {/* <Image
                     src='/frdge-logo.svg'

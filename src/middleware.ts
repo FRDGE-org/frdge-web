@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextRequest, NextResponse } from 'next/server'
+import { getBaseUrl } from './lib/utils'
 
 
 export async function middleware(request: NextRequest) {
@@ -50,7 +51,7 @@ export async function updateSession(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
       console.log('Trying to hit login or signup after having logged in; redirecting to home')
-      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_BASE_URL))
+      return NextResponse.redirect(new URL('/', getBaseUrl()))
     }
   }
   return supabaseResponse

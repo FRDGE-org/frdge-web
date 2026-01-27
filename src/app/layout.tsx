@@ -31,7 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
+          {/* <SidebarProvider> */}
             <div className="flex min-h-screen w-full flex-col">
               <Header />
               <main className="flex flex-1 flex-col px-4 pt-10 xl:px-8">
@@ -40,7 +40,7 @@ export default function RootLayout({
               <Footer />
             </div>
             <Toaster />
-          </SidebarProvider>
+          {/* </SidebarProvider> */}
         </ThemeProvider>
       </body>
     </html>

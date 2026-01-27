@@ -121,7 +121,7 @@ export default function IngredientList({ ingredients }: Props) {
           {selectedCount} item{selectedCount !== 1 ? 's' : ''} selected
         </div>
       </div>
-      <div className='flex flex-end flex-row w-full justify-end'>
+      <div className='flex flex-end flex-row w-full justify-end text-'>
         <div className='grid grid-cols-2 gap-2'>
           <div/>
           <Button disabled={selectedCount === 0 || isDeleting} onClick={handleDeleteSelected}>

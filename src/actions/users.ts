@@ -1,7 +1,7 @@
 "use server"
 
 import { createClient } from "@/auth/server"
-import { handleError } from "@/lib/utils"
+import { handleError, getBaseUrl } from "@/lib/utils"
 import { prisma } from "@/db/prisma"
 
 export const loginAction = async (email: string, password: string) => {
@@ -40,7 +40,7 @@ export const signUpAction = async (email: string, password: string) => {
             email,
             password,
             options: {
-                emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`
+                emailRedirectTo: `${getBaseUrl()}/auth/callback`
             }
         })
         if (error) {
@@ -48,7 +48,7 @@ export const signUpAction = async (email: string, password: string) => {
             throw error
         } else {
             // console.log('[signUpAction] auth.signup worked. Theres no error.')
-            console.log('Redirect URL:', `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`)
+            console.log('Redirect URL:', `${getBaseUrl()}/auth/callback`)
         }
 
         const userId = data.user?.id
