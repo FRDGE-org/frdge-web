@@ -7,10 +7,17 @@
     "build": "pnpm dlx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "pnpm dlx prisma generate && dotenv pnpm dlx prisma migrate dev"
+    "migrate": "pnpm dlx prisma generate && dotenv pnpm dlx prisma migrate dev",
+    "prepare": "husky"
   },
   "prisma": {
     "schema": "src/db/schema.prisma"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
@@ -22,12 +29,14 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@sentry/nextjs": "^10.37.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.55.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "fuse.js": "^7.1.0",
+    "import-in-the-middle": "^2.0.6",
     "lucide-react": "^0.540.0",
     "next": "15.4.10",
     "next-themes": "^0.4.6",
@@ -35,6 +44,7 @@
     "pg": "^8.16.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "require-in-the-middle": "^8.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "uuid": "^13.0.0",
@@ -50,6 +60,8 @@
     "dotenv-cli": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "prisma": "^7.3.0",
