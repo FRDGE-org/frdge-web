@@ -63,9 +63,10 @@ export default function RecipeModal({
   }, [ingredientKey]);
 
   // Ask openAI when modal opens and no recipe has been generated yet for the selected ingredients
-   
+
   useEffect(() => {
     if (isOpen && !recipe) fetchRecipe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, recipe]);
 
   return (
