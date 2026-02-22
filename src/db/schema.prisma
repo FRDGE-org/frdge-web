@@ -20,6 +20,12 @@ enum TimeToExpire {
   VERYLONG
 }
 
+enum TimeUnit {
+  minutes
+  hours
+  days
+}
+
 model Ingredient {
   id           String       @id @default(uuid()) @db.Uuid
   author       User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
@@ -36,12 +42,28 @@ model Ingredient {
 }
 
 model User {
-  id          String       @id @default(uuid()) @db.Uuid
-  email       String       @unique
-  name        String?
-  ingredients Ingredient[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @default(now()) @updatedAt
+  id             String          @id @default(uuid()) @db.Uuid
+  email          String          @unique
+  name           String?
+  ingredients    Ingredient[]
+  recipeArchives RecipeArchive[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @default(now()) @updatedAt
+}
+
+model RecipeArchive {
+  id               String    @id @default(uuid()) @db.Uuid
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String    @db.Uuid
+  title            String
+  timeNeededAmount Int
+  timeNeededUnit   TimeUnit
+  steps            String[]
+  macros           String[]
+  ingredientNames  String[]
+  archivedAt       DateTime  @default(now())
+
+  @@index([userId])
 }
 
 model PushSubscription {

@@ -2,6 +2,7 @@
 
 import { getRecipeAction } from "@/actions/recipes";
 import { deleteIngredientsAction } from "@/actions/ingredients";
+import { saveRecipeArchiveAction } from "@/actions/recipeArchive";
 import { Ingredient } from "@prisma/client";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -44,6 +45,20 @@ export default function RecipeModal({
 
   const handleCooked = async () => {
     setIsLoading(true);
+
+    if (recipe) {
+      const { errorMessage: archiveError } = await saveRecipeArchiveAction(
+        recipe,
+        ingredients,
+      );
+
+      if (archiveError) {
+        toast.error(archiveError);
+        setIsLoading(false);
+        return;
+      }
+    }
+
     const { errorMessage } = await deleteIngredientsAction(
       ingredients.map((i) => i.id),
     );
