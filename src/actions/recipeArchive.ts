@@ -5,6 +5,7 @@ import { prisma } from "@/db/prisma";
 import { handleError } from "@/lib/utils";
 import { Ingredient } from "@prisma/client";
 import { Recipe } from "@/types/recipe";
+import { ERRORS } from "@/lib/errors";
 
 export const saveRecipeArchiveAction = async (
   recipe: Recipe,
@@ -12,7 +13,7 @@ export const saveRecipeArchiveAction = async (
 ) => {
   try {
     const user = await getUser();
-    if (!user) throw new Error("You must be logged in to save a recipe");
+    if (!user) throw new Error(ERRORS.UNAUTHENTICATED);
 
     await prisma.recipeArchive.create({
       data: {
