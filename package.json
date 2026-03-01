@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "migrate": "prisma generate && dotenv prisma migrate dev",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "vitest run"
   },
   "prisma": {
     "schema": "src/db/schema.prisma"
@@ -56,7 +57,8 @@
       "@sentry/cli",
       "prisma",
       "sharp",
-      "unrs-resolver"
+      "unrs-resolver",
+      "esbuild"
     ]
   },
   "devDependencies": {
@@ -66,17 +68,21 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/web-push": "^3.6.4",
+    "@vitejs/plugin-react": "^5.1.2",
+    "dotenv": "^17.3.1",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
+    "jsdom": "^27.4.0",
     "lint-staged": "^16.2.7",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "prisma": "^7.3.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.7",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }
