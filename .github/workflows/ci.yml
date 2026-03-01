@@ -20,4 +20,6 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec prisma generate
+        env:
+          DIRECT_URL: postgresql://dummy:dummy@localhost:5432/dummy
       - run: pnpm test
